@@ -3,6 +3,8 @@ package com.vti.carshop.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Getter
 @Setter
@@ -10,7 +12,7 @@ import lombok.Setter;
 @Table(name = "accessory")
 public class Accessory {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -27,9 +29,11 @@ public class Accessory {
     private String repairStatus;
 
     @ManyToOne
-    @JoinColumns({
+    @JoinColumns(value = {
             @JoinColumn(name = "license_plate", referencedColumnName = "license_plate", nullable = false),
             @JoinColumn(name = "repair_date", referencedColumnName = "repair_date", nullable = false)
     })
+
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Car car;
 }

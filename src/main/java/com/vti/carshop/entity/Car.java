@@ -1,10 +1,11 @@
 package com.vti.carshop.entity;
 
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @Getter
@@ -18,8 +19,8 @@ public class Car {
     @Column(name = "customer_name", length = 50, nullable = false)
     private String customerName;
 
-    @Column(name = "catalog", length = 50, nullable = false)
-    private String catalog;
+    @Column(name = "catalogs", length = 50, nullable = false)
+    private String catalogs;
 
     @Column(name = "car_maker", length = 50, nullable = false)
     private String carMaker;
@@ -29,13 +30,14 @@ public class Car {
 
     @Getter
     @Setter
+    @EqualsAndHashCode
     @Embeddable
     public static class CarPk {
         @Column(name = "license_plate", length = 10, nullable = false)
         private String licensePlate;
 
-        @Column(name = "repair_date", nullable = false, updatable = false)
-        private LocalDateTime repairDate;
+        @Column(name = "repair_date", nullable = false)
+        private LocalDate repairDate;
     }
 }
 
